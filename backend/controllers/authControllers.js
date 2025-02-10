@@ -59,7 +59,6 @@ exports.login = async (req, res) => {
   }
   catch (err) {
     console.error(err);
-    console.error(err.body)
     return res.status(500).json({ status: false, msg: "Internal Server Error" });
   }
 }
