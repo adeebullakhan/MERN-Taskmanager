@@ -20,6 +20,7 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mern-task-manager": "file:..",
+    "mongodb": "^6.17.0",
     "mongoose": "^6.2.3"
   },
   "devDependencies": {
