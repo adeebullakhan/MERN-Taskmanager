@@ -8,7 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 
-app.use(express.json());
+
 // app.use(cors());
 const allowedOrigins = [
   'http://localhost:3000',
@@ -23,7 +23,11 @@ app.use(cors({
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true // Optional: only if using cookies or auth headers
+  // new added code
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // 👈 Include OPTIONS explicitly
+  allowedHeaders: ["Content-Type", "Authorization"] 
+  // credentials: true // Optional: only if using cookies or auth headers
 }));
 
 app.use(express.json());
@@ -34,6 +38,10 @@ mongoose.connect(mongoUrl, err => {
   if (err) throw err;
   console.log("Mongodb connected...");
 });
+
+//new added code
+app.options("*", cors()); // 👈 Handles all OPTIONS preflight requests
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);

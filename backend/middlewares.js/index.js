@@ -4,6 +4,10 @@ const { ACCESS_TOKEN_SECRET } = process.env;
 
 
 exports.verifyAccessToken = async (req, res, next) => {
+// new added code
+
+if (req.method === "OPTIONS") return next();
+
 
   const token = req.header("Authorization");
   if (!token) return res.status(400).json({ status: false, msg: "Token not found" });
