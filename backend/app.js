@@ -12,13 +12,13 @@ const profileRoutes = require("./routes/profileRoutes");
 // app.use(cors());
 const allowedOrigins = [
   'http://localhost:3000',
+    'https://mern-taskmanager.vercel.app',
   'https://mern-taskmanager-8d6l3cw22-adeeb-khans-projects.vercel.app',
-  'https://mern-taskmanager.vercel.app/'
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-     console.log("Request origin:", origin); 
+     console.log("Request origin:", origin); // 👈 Log the origin of the request
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
