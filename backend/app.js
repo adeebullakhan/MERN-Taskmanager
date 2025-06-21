@@ -9,7 +9,25 @@ const taskRoutes = require("./routes/taskRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://mern-taskmanager-8d6l3cw22-adeeb-khans-projects.vercel.app'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true // Optional: only if using cookies or auth headers
+}));
+
+app.use(express.json());
+
 
 const mongoUrl = process.env.MONGODB_URL;
 mongoose.connect(mongoUrl, err => {
